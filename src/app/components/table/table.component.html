@@ -1,0 +1,13 @@
+@if(_columns.length > 0){
+<table>
+    <thead>
+        <tr>
+            @for(column of _columns; track column){
+            <th>
+                {{column.value}}
+            </th>
+            }
+        </tr>
+    </thead>
+</table>
+}

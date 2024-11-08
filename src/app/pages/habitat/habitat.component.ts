@@ -34,7 +34,6 @@ export class HabitatComponent {
 
   async ngOnInit(): Promise<void> {
     this.rowsHabitat = await this.getHabitats();
-    console.log(this.rowsHabitat)
   }
 
   public async getHabitats() {

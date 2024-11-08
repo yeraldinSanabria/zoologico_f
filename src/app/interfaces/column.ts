@@ -16,3 +16,15 @@ export interface Habitat {
     state: number;
     description: String;
 }
+
+export interface Type {
+    name: String;
+    id: number;
+    state: number;
+}
+
+export interface Animals {
+    name: String;
+    id: number;
+    state: number;
+}

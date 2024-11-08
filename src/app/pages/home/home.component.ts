@@ -17,20 +17,6 @@ export class HomeComponent {
 
 	
 
-	public tableTypes: Column[] = [
-		{
-			label: 'id',
-			value: 'id'
-		},
-		{
-			label: 'name',
-			value: 'nombre'
-		},
-		{
-			label: 'description',
-			value: 'descripcion'
-		}
-	]
 
 	public tableSpecies: Column[] = [
 		{

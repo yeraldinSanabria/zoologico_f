@@ -28,3 +28,10 @@ export interface Animals {
     id: number;
     state: number;
 }
+
+export interface Species {
+    name: String;
+    id: number;
+    state: number;
+    extinct: boolean;
+}

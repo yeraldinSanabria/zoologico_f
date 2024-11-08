@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TableComponent } from '../../components/table/table.component';
-import { Column, Diet } from '../../interfaces/column';
+import { Column} from '../../interfaces/column';
 
 
 
@@ -13,20 +13,7 @@ import { Column, Diet } from '../../interfaces/column';
 })
 export class HomeComponent {
 
-	public tableHabitats: Column[] = [
-		{
-			label: 'id',
-			value: 'id'
-		},
-		{
-			label: 'name',
-			value: 'nombre'
-		},
-		{
-			label: 'description',
-			value: 'descripcion'
-		}
-	]
+	
 
 	
 

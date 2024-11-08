@@ -6,14 +6,11 @@ import { TableComponent } from '../../components/table/table.component';
 @Component({
   selector: 'app-diet',
   standalone: true,
-  imports: [
-    TableComponent
-  ],
+  imports: [TableComponent],
   templateUrl: './diet.component.html',
   styleUrl: './diet.component.scss'
 })
 export class DietComponent {
-
 
   private readonly servicesDiet = inject(DietService);
 
@@ -27,12 +24,8 @@ export class DietComponent {
       value: 'type'
     },
     {
-      label: 'Description',
+      label: 'Descripción',
       value: 'description'
-    },
-    {
-      label: 'Estado',
-      value: 'state'
     }
   ]
 
@@ -40,7 +33,6 @@ export class DietComponent {
 
   async ngOnInit(): Promise<void> {
     this.rowsDiets = await this.getDiets();
-    console.log(this.rowsDiets)
   }
 
   public async getDiets() {

@@ -9,3 +9,10 @@ export interface Diet {
     state: number;
     type: String
 }
+
+export interface Habitat {
+    name: String;
+    id: number;
+    state: number;
+    description: String;
+}

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { TableComponent } from '../../components/table/table.component';
-import { Column } from '../../interfaces/column'
+import { Column, Diet } from '../../interfaces/column';
+
+
 
 @Component({
 	selector: 'app-home',
@@ -10,6 +12,7 @@ import { Column } from '../../interfaces/column'
 	styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+
 	public tableHabitats: Column[] = [
 		{
 			label: 'id',
@@ -25,20 +28,7 @@ export class HomeComponent {
 		}
 	]
 
-	public tableDiet: Column[] = [
-		{
-			label: 'id',
-			value: 'id'
-		},
-		{
-			label: 'type',
-			value: 'tipo'
-		},
-		{
-			label: 'description',
-			value: 'descripcion'
-		}
-	]
+	
 
 	public tableTypes: Column[] = [
 		{
@@ -57,7 +47,7 @@ export class HomeComponent {
 
 	public tableSpecies: Column[] = [
 		{
-			label: 'id',
+			label: 'Id',
 			value: 'id'
 		},
 		{
@@ -80,4 +70,11 @@ export class HomeComponent {
 			value: 'nombre'
 		}
 	]
+
+
+
+	async ngOnInit(): Promise<void> {
+	
+	}
+
 }

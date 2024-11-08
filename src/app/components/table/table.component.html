@@ -4,10 +4,22 @@
         <tr>
             @for(column of _columns; track column){
             <th>
-                {{column.value}}
+                {{column.label}}
             </th>
             }
         </tr>
     </thead>
+    <tbody>
+        @for(row of _rows; track row){
+        <tr>
+            @for(column of _columns; track column){
+            <td>
+                {{row[column.value]}}
+            </td>
+            }
+
+        </tr>
+        }
+    </tbody>
 </table>
 }

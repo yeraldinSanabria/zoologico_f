@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TableComponent } from '../../components/table/table.component';
-import { Animals, Column, Species } from '../../interfaces/column';
+import { Action, Animals, Column, Species } from '../../interfaces/column';
 import { AnimalsService } from '../../services/animals.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -52,16 +52,26 @@ export class AnimalsComponent {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
+      id: [],
       name: ['', [Validators.required]],
       species_id: ['', [Validators.required]],
+      action: ['N', [Validators.required]]
     })
   }
 
   public async onSave() {
-    await this.servicesAnimals.postAnimals(this.form.value);
-    this.form.reset();
-    await this.consultData();
+    let value = this.form.value
+    if (value.action == 'N') {
+      await this.servicesAnimals.postAnimals(this.form.value);
+    }
 
+    if (value.action == 'E') {
+      await this.servicesAnimals.putAnimals(this.form.value)
+    }
+
+    this.form.reset();
+    this.form.get('action')?.setValue('N');
+    await this.consultData();
   }
 
   private async consultData() {
@@ -74,4 +84,16 @@ export class AnimalsComponent {
     return listar;
   }
 
+
+  public actions(event: Action) {
+
+    if (event.action == 1) {
+      this.form.patchValue({
+        id: event.row.id,
+        name: event.row.name,
+        species_id: event.row.species_id,
+        action: 'E'
+      })
+    }
+  }
 }

@@ -34,7 +34,35 @@ export class AnimalsService {
   public postAnimals(data: Animals): Promise<any> {
     return new Promise((resolve, reject) => {
       let subscription: Subscription;
-      subscription = this.http.post(`${this.url_base}/animals`, data).subscribe({
+      let dataSend = {
+        name: data.name,
+        species: data.species_id
+      }
+      subscription = this.http.post(`${this.url_base}/animals`, dataSend).subscribe({
+        next: (result) => {
+          resolve(result);
+        },
+        error: (error: any) => {
+          reject(error);
+        },
+        complete: () => {
+          if (subscription) {
+            subscription.unsubscribe();
+          }
+        }
+      })
+    });
+  }
+
+
+  public putAnimals(data: Animals): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let subscription: Subscription;
+      let dataSend = {
+        name: data.name,
+        species_id: data.species_id
+      }
+      subscription = this.http.put(`${this.url_base}/animals/${data.id}`, dataSend).subscribe({
         next: (result) => {
           resolve(result);
         },
@@ -50,3 +78,4 @@ export class AnimalsService {
     });
   }
 }
+

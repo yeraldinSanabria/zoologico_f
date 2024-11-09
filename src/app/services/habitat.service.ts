@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { Habitat } from '../interfaces/column';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,24 @@ export class HabitatService {
     });
   }
 
-
-
+	public postType(data: Habitat): Promise<any> {
+		return new Promise((resolve, reject) => {
+			let subscription: Subscription;
+			subscription = this.http.post(`${this.url_base}/habitats`,data).subscribe({
+				next: (result) => {
+					resolve(result);
+				},
+				error: (error: any) => {
+					reject(error);
+				},
+				complete: () => {
+					if (subscription) {
+						subscription.unsubscribe();
+					}
+				}
+			})
+		});
+	}
 
 
 }

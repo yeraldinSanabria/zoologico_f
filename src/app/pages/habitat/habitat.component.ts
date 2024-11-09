@@ -39,7 +39,7 @@ export class HabitatComponent {
 
   async ngOnInit(): Promise<void> {
     this.createForm();
-    this.rowsHabitat = await this.getHabitats();
+    await this.consultData();
   }
 
   public async getHabitats() {
@@ -54,7 +54,14 @@ export class HabitatComponent {
     })
   }
 
-  public onSave() {
-    console.log(this.form.value)
+  public async onSave() {
+    await this.servicesHabitat.postType(this.form.value);
+    await this.consultData();
+  }
+
+
+  private async consultData() {
+    this.rowsHabitat = [];
+    this.rowsHabitat = await this.getHabitats();
   }
 }

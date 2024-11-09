@@ -35,21 +35,28 @@ export class TypeComponent {
 
   async ngOnInit(): Promise<void> {
     this.createForm();
-    this.rowsType = await this.getTypes();
+    await this.consultData();
   }
 
   public async getTypes() {
     let listar = await this.servicesType.getType();
     return listar;
   }
-  
+
   private createForm(): void {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
     })
   }
 
-  public onSave(){
-    console.log(this.form.value)
+  public async onSave() {
+    await this.servicesType.postType(this.form.value);
+    await this.consultData();
+
+  }
+
+  private async consultData() {
+    this.rowsType = [];
+    this.rowsType = await this.getTypes();
   }
 }

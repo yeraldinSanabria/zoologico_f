@@ -27,6 +27,7 @@ export interface Animals {
     name: String;
     id: number;
     state: number;
+    species_id:number;
 }
 
 export interface Species {

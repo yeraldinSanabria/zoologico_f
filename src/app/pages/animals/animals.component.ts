@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { TableComponent } from '../../components/table/table.component';
-import { Animals, Column } from '../../interfaces/column';
+import { Animals, Column, Species } from '../../interfaces/column';
 import { AnimalsService } from '../../services/animals.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SpeciesService } from '../../services/species.service';
 
 @Component({
   selector: 'app-animals',
@@ -16,6 +17,7 @@ export class AnimalsComponent {
 
   private readonly servicesAnimals = inject(AnimalsService);
   private readonly formBuilder = inject(FormBuilder);
+  private readonly servicesSpecies = inject(SpeciesService);
 
   public form!: FormGroup;
 
@@ -27,13 +29,20 @@ export class AnimalsComponent {
     {
       label: 'Nombre',
       value: 'name'
+    },
+    {
+      label: ' Especie',
+      value: 'species_id'
     }
   ]
   public rowsAnimal: Animals[] = [];
+  public rowsSpecies: Species[] = [];
 
   async ngOnInit(): Promise<void> {
     this.createForm();
-    this.rowsAnimal = await this.getAnimals();
+    await this.consultData();
+    this.rowsSpecies = await this.listSpecies();
+
   }
 
   public async getAnimals() {
@@ -44,10 +53,24 @@ export class AnimalsComponent {
   private createForm(): void {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
+      species_id: ['', [Validators.required]],
     })
   }
 
-  public onSave() {
-    console.log(this.form.value)
+  public async onSave() {
+    await this.servicesAnimals.postAnimals(this.form.value);
+    await this.consultData();
+
   }
+
+  private async consultData() {
+    this.rowsAnimal = [];
+    this.rowsAnimal = await this.getAnimals();
+  }
+
+  public async listSpecies() {
+    let listar = await this.servicesSpecies.getService();
+    return listar;
+  }
+
 }

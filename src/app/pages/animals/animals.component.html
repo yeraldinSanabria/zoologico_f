@@ -3,6 +3,14 @@
         <label for="name">Nombre</label>
         <input type="text" name="name" id="name" formControlName="name">
     </div>
+    <div>
+        <label for="species_id">Especies</label>
+        <select name="species_id" id="species_id" formControlName="species_id">
+            @for(rowsSpecie of rowsSpecies; track rowsSpecies){
+                <option [ngValue]="rowsSpecie.id">{{rowsSpecie.name}}</option>
+            }
+        </select>
+    </div>
     <button type="submit" [disabled]="!form.valid">Guardar</button>
 </form>
 <app-table [columns]="tableAnimals"[rows]="rowsAnimal"/>

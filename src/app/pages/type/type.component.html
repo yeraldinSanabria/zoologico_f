@@ -5,4 +5,4 @@
     </div>
     <button type="submit" [disabled]="!form.valid">Guardar</button>
 </form>
-<app-table [columns]="tableTypes"[rows]="rowsType"/>
+<app-table [columns]="tableTypes"[rows]="rowsType" (dataActions)="actions($event)"/>

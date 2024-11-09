@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Column, Type } from '../../interfaces/column';
+import { Action, Column, Type } from '../../interfaces/column';
 import { TableComponent } from '../../components/table/table.component';
 import { TypeService } from '../../services/type.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -59,5 +59,9 @@ export class TypeComponent {
   private async consultData() {
     this.rowsType = [];
     this.rowsType = await this.getTypes();
+  }
+
+  public actions(event:Action){
+    console.log(event)
   }
 }

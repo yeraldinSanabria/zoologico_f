@@ -6,6 +6,16 @@ table{
         th, td{
             padding: 5px;
             border:1px solid black;
+            button{
+                background: none;
+                border: none;
+                cursor: pointer;
+             img{
+                width: 20px;
+                height: auto;
+            }   
+            }
+            
         }
     }
 }

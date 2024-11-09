@@ -27,15 +27,20 @@ export interface Animals {
     name: String;
     id: number;
     state: number;
-    species_id:number;
+    species_id: number;
 }
 
 export interface Species {
     name: String;
     id: number;
     state: number;
-    type_id:number,
-    habitats_id:number,
-    diet_id:number,
+    type_id: number,
+    habitats_id: number,
+    diet_id: number,
     extinct: boolean;
+}
+
+export interface Action {
+    action: number;
+    row: any;
 }

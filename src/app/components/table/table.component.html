@@ -7,7 +7,9 @@
                 {{column.label}}
             </th>
             }
+            <th>acciones</th>
         </tr>
+        
     </thead>
     <tbody>
         @for(row of _rows; track row){
@@ -17,7 +19,14 @@
                 {{row[column.value]}}
             </td>
             }
-
+            <td>
+                <button (click)="action(1, row)">
+                    <img src="./icons/pencil.svg" alt="editar" class="">
+                </button>
+                <button (click)="action(0, row)">
+                    <img src="./icons/trash.svg" alt="editar" class="">
+                </button>
+            </td>
         </tr>
         }
     </tbody>

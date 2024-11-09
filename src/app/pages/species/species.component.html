@@ -6,7 +6,7 @@
     <div>
         <label for="type_id">Tipo</label>
         <select name="type_id" id="type_id" formControlName="type_id">
-            @for(rowType of rowsType; track rowType){
+            @for(rowType of rowsTypes; track rowType){
                 <option [ngValue]="rowType.id">{{rowType.name}}</option>
             }
         </select>
@@ -14,7 +14,7 @@
     <div>
         <label for="habitats_id">Habitas</label>
         <select name="habitats_id" id="habitats_id" formControlName="habitats_id">
-            @for(rowH of rowsHabitat; track rowH){
+            @for(rowH of rowsHabitats; track rowH){
                 <option [ngValue]="rowH.id">{{rowH.name}}</option>
             }
         </select>

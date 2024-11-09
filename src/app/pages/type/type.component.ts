@@ -51,6 +51,7 @@ export class TypeComponent {
 
   public async onSave() {
     await this.servicesType.postType(this.form.value);
+    this.form.reset();
     await this.consultData();
 
   }

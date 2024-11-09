@@ -55,6 +55,7 @@ export class DietComponent {
 
   public async onSave(){
     await this.servicesDiet.postType(this.form.value);
+    this.form.reset();
     await this.consultData();
   }
 

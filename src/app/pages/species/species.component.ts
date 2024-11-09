@@ -55,16 +55,16 @@ export class SpeciesComponent {
   ]
 
   public rowsSpecies: Species[] = [];
-  public rowsHabitat: Habitat[] = [];
+  public rowsHabitats: Habitat[] = [];
   public rowsDiets: Diet[] = [];
-  public rowsType: Type[] = [];
+  public rowsTypes: Type[] = [];
 
   async ngOnInit(): Promise<void> {
     this.createForm();
     this.rowsSpecies = await this.getSpecies();
-    this.rowsHabitat = await this.listHabitat();
+    this.rowsHabitats = await this.listHabitat();
     this.rowsDiets = await this.listDiet();
-    this.rowsType = await this.listType();
+    this.rowsTypes = await this.listType();
   }
 
   public async getSpecies() {
@@ -82,8 +82,11 @@ export class SpeciesComponent {
     })
   }
 
-  public onSave() {
-    console.log(this.form.value)
+  public async onSave() {
+    await this.servicesSpecies.postSpecies(this.form.value);
+    this.form.reset();
+    await this.consultData();
+
   }
 
   public async listHabitat() {
@@ -100,4 +103,10 @@ export class SpeciesComponent {
     let listar = await this.servicesType.getType();
     return listar;
   }
+
+  private async consultData() {
+    this.rowsSpecies = [];
+    this.rowsSpecies = await this.getSpecies();
+  }
+
 }

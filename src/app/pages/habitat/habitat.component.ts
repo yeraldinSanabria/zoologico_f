@@ -56,6 +56,7 @@ export class HabitatComponent {
 
   public async onSave() {
     await this.servicesHabitat.postType(this.form.value);
+    this.form.reset();
     await this.consultData();
   }
 

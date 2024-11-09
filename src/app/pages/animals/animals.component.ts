@@ -59,6 +59,7 @@ export class AnimalsComponent {
 
   public async onSave() {
     await this.servicesAnimals.postAnimals(this.form.value);
+    this.form.reset();
     await this.consultData();
 
   }

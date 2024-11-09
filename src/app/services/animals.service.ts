@@ -36,7 +36,7 @@ export class AnimalsService {
       let subscription: Subscription;
       let dataSend = {
         name: data.name,
-        species: data.species_id
+        species_id: data.species_id
       }
       subscription = this.http.post(`${this.url_base}/animals`, dataSend).subscribe({
         next: (result) => {

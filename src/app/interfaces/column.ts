@@ -33,5 +33,8 @@ export interface Species {
     name: String;
     id: number;
     state: number;
+    type_id:number,
+    habitats_id:number,
+    diet_id:number,
     extinct: boolean;
 }

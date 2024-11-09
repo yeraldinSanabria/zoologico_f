@@ -1,1 +1,12 @@
+<form [formGroup]="form" (ngSubmit)="onSave()">
+    <div>
+        <label for="name">Nombre</label>
+        <input type="text" name="name" id="name" formControlName="name">
+    </div>
+    <div>
+        <label for="description">Descripción</label>
+        <input type="text" name="description" id="description" formControlName="description">
+    </div>
+    <button type="submit" [disabled]="!form.valid">Guardar</button>
+</form>
 <app-table [columns]="tableHabitats" [rows]="rowsHabitat"/>

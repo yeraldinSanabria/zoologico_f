@@ -1,1 +1,8 @@
+<form [formGroup]="form" (ngSubmit)="onSave()">
+    <div>
+        <label for="name">Nombre</label>
+        <input type="text" name="name" id="name" formControlName="name">
+    </div>
+    <button type="submit" [disabled]="!form.valid">Guardar</button>
+</form>
 <app-table [columns]="tableTypes"[rows]="rowsType"/>

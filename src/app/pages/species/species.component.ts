@@ -1,12 +1,18 @@
 import { Component, inject } from '@angular/core';
 import { TableComponent } from '../../components/table/table.component';
-import { Column, Species } from '../../interfaces/column';
+import { Column, Diet, Habitat, Species, Type } from '../../interfaces/column';
 import { SpeciesService } from '../../services/species.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HabitatService } from '../../services/habitat.service';
+import { DietService } from '../../services/diet.service';
+import { TypeService } from '../../services/type.service';
+
 
 @Component({
   selector: 'app-species',
   standalone: true,
-  imports: [TableComponent],
+  imports: [TableComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './species.component.html',
   styleUrl: './species.component.scss'
 })
@@ -14,6 +20,12 @@ export class SpeciesComponent {
 
 
   private readonly servicesSpecies = inject(SpeciesService);
+  private readonly servicesHabitat = inject(HabitatService);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly servicesDiet = inject(DietService);
+  private readonly servicesType = inject(TypeService);
+
+  public form!: FormGroup;
 
   public tableSpecies: Column[] = [
     {
@@ -25,19 +37,67 @@ export class SpeciesComponent {
       value: 'name'
     },
     {
+      label: 'Tipo',
+      value: 'type_id'
+    },
+    {
+      label: 'Hábitat',
+      value: 'habitats_id'
+    },
+    {
+      label: 'Dieta',
+      value: 'diet_id'
+    },
+    {
       label: 'Extinto',
       value: 'extinct'
     }
   ]
 
   public rowsSpecies: Species[] = [];
+  public rowsHabitat: Habitat[] = [];
+  public rowsDiets: Diet[] = [];
+  public rowsType: Type[] = [];
 
   async ngOnInit(): Promise<void> {
+    this.createForm();
     this.rowsSpecies = await this.getSpecies();
+    this.rowsHabitat = await this.listHabitat();
+    this.rowsDiets = await this.listDiet();
+    this.rowsType = await this.listType();
   }
 
   public async getSpecies() {
     let listar = await this.servicesSpecies.getService();
+    return listar;
+  }
+
+  private createForm(): void {
+    this.form = this.formBuilder.group({
+      type_id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      habitats_id: ['', [Validators.required]],
+      diet_id: ['', [Validators.required]],
+      extinct: ['', [Validators.required]]
+    })
+  }
+
+  public onSave() {
+    console.log(this.form.value)
+  }
+
+  public async listHabitat() {
+    let listar = await this.servicesHabitat.getHabitat();
+    return listar;
+  }
+
+  public async listDiet() {
+    let listar = await this.servicesDiet.getDiet();
+    return listar;
+  }
+
+  public async listType() {
+    let listar = await this.servicesType.getType();
     return listar;
   }
 }

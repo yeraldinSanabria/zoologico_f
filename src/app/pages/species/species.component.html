@@ -1,1 +1,37 @@
-<app-table [columns]="tableSpecies"[rows]="rowsSpecies"/>
+<form [formGroup]="form" (ngSubmit)="onSave()">
+    <div>
+        <label for="name">Nombre</label>
+        <input type="text" name="name" id="name" formControlName="name">
+    </div>
+    <div>
+        <label for="type_id">Tipo</label>
+        <select name="type_id" id="type_id" formControlName="type_id">
+            @for(rowType of rowsType; track rowType){
+                <option [ngValue]="rowType.id">{{rowType.name}}</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label for="habitats_id">Habitas</label>
+        <select name="habitats_id" id="habitats_id" formControlName="habitats_id">
+            @for(rowH of rowsHabitat; track rowH){
+                <option [ngValue]="rowH.id">{{rowH.name}}</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label for="diet_id">Dieta</label>
+        <select name="diet_id" id="diet_id" formControlName="diet_id">
+            @for(rowDiet of rowsDiets; track rowDiet){
+                <option [ngValue]="rowDiet.id">{{rowDiet.type}}</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label for="extinct">Extinto</label>
+        <input type="radio" name="extinct" value="0" formControlName="extinct">no
+        <input type="radio" name="extinct" value="1" formControlName="extinct">si
+    </div>
+    <button type="submit" [disabled]="!form.valid">Guardar</button>
+</form>
+<app-table [columns]="tableSpecies" [rows]="rowsSpecies" />

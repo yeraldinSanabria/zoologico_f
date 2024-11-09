@@ -38,7 +38,7 @@ export class DietComponent {
 
   async ngOnInit(): Promise<void> {
     this.createForm();
-    this.rowsDiets = await this.getDiets();
+    await this.consultData();
   }
 
   public async getDiets() {
@@ -53,7 +53,13 @@ export class DietComponent {
     })
   }
 
-  public onSave(){
-    console.log(this.form.value)
+  public async onSave(){
+    await this.servicesDiet.postType(this.form.value);
+    await this.consultData();
+  }
+
+  private async consultData() {
+    this.rowsDiets = [];
+    this.rowsDiets = await this.getDiets();
   }
 }

@@ -77,7 +77,7 @@ export class HabitatComponent {
     this.rowsHabitat = await this.getHabitats();
   }
 
-  public actions(event: Action) {
+  public async actions(event: Action) {
 
     if (event.action == 1) {
       this.form.patchValue({
@@ -86,6 +86,10 @@ export class HabitatComponent {
         description: event.row.description,
         action: 'E'
       })
+    }
+    if (event.action == 0) {
+      await this.servicesHabitat.deletetHabitat(event.row);
+      await this.consultData();
     }
   }
 }

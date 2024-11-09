@@ -77,5 +77,23 @@ export class HabitatService {
 		});
 	}
 
+	public deletetHabitat(data: Habitat): Promise<any> {
+		return new Promise((resolve, reject) => {
+			let subscription: Subscription;
+			subscription = this.http.delete(`${this.url_base}/habitats/${data.id}`).subscribe({
+				next: (result) => {
+					resolve(result);
+				},
+				error: (error: any) => {
+					reject(error);
+				},
+				complete: () => {
+					if (subscription) {
+						subscription.unsubscribe();
+					}
+				}
+			})
+		});
+	}
 
 }

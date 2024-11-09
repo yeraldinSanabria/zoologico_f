@@ -120,7 +120,7 @@ export class SpeciesComponent {
     this.rowsSpecies = await this.getSpecies();
   }
 
-  public actions(event: Action) {
+  public async actions(event: Action) {
 
     if (event.action == 1) {
       this.form.patchValue({
@@ -132,6 +132,10 @@ export class SpeciesComponent {
         extinct: event.row.extinct,
         action: 'E'
       })
+    }
+    if (event.action == 0) {
+      await this.servicesSpecies.deleteSpecies(event.row);
+      await this.consultData();
     }
   }
 }

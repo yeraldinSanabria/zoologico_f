@@ -75,15 +75,19 @@ export class DietComponent {
     this.rowsDiets = await this.getDiets();
   }
 
-  public actions(event: Action) {
+  public async actions(event: Action) {
 
     if (event.action == 1) {
       this.form.patchValue({
         id: event.row.id,
         type: event.row.type,
-        description:event.row.description,
+        description: event.row.description,
         action: 'E'
       })
+    }
+    if (event.action === 0) {
+      await this.servicesDiet.deleteDiet(event.row);
+      await this.consultData();
     }
   }
 }

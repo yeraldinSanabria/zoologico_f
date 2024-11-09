@@ -76,4 +76,23 @@ export class DietService {
 			})
 		});
 	}
+	
+	public deleteDiet(data: Diet): Promise<any> {
+		return new Promise((resolve, reject) => {
+			let subscription: Subscription;
+			subscription = this.http.delete(`${this.url_base}/diet/${data.id}`).subscribe({
+				next: (result) => {
+					resolve(result);
+				},
+				error: (error: any) => {
+					reject(error);
+				},
+				complete: () => {
+					if (subscription) {
+						subscription.unsubscribe();
+					}
+				}
+			})
+		});
+	}
 }

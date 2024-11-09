@@ -85,7 +85,7 @@ export class AnimalsComponent {
   }
 
 
-  public actions(event: Action) {
+  public async actions(event: Action) {
 
     if (event.action == 1) {
       this.form.patchValue({
@@ -94,6 +94,10 @@ export class AnimalsComponent {
         species_id: event.row.species_id,
         action: 'E'
       })
+    }
+    if (event.action === 0) {
+      await this.servicesAnimals.deleteAnimals(event.row);
+      await this.consultData();
     }
   }
 }

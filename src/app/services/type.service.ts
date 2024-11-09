@@ -78,4 +78,23 @@ export class TypeService {
 		});
 	}
 
+	public deleteType(data: Type): Promise<any> {
+		return new Promise((resolve, reject) => {
+			let subscription: Subscription;
+			subscription = this.http.delete(`${this.url_base}/types/${data.id}`).subscribe({
+				next: (result) => {
+					resolve(result);
+				},
+				error: (error: any) => {
+					reject(error);
+				},
+				complete: () => {
+					if (subscription) {
+						subscription.unsubscribe();
+					}
+				}
+			})
+		});
+	}
+
 }

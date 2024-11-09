@@ -72,7 +72,7 @@ export class TypeComponent {
     this.rowsType = await this.getTypes();
   }
 
-  public actions(event: Action) {
+  public async actions(event: Action) {
 
     if (event.action == 1) {
       this.form.patchValue({
@@ -80,6 +80,11 @@ export class TypeComponent {
         name: event.row.name,
         action: 'E'
       })
+    }
+
+    if(event.action === 0){
+      await this.servicesType.deleteType(event.row);
+      await this.consultData();
     }
   }
 }

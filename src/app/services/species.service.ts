@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { Animals } from '../interfaces/column';
+import { Species } from '../interfaces/column';
 
 @Injectable({
 	providedIn: 'root'
@@ -30,10 +30,43 @@ export class SpeciesService {
 			})
 		});
 	}
-	public postSpecies(data: Animals): Promise<any> {
+	public postSpecies(data: Species): Promise<any> {
 		return new Promise((resolve, reject) => {
 			let subscription: Subscription;
-			subscription = this.http.post(`${this.url_base}/species`, data).subscribe({
+			let dataSend = {
+				type_id: data.type_id,
+				name: data.name,
+				habitats_id: data.habitats_id,
+				diet_id: data.diet_id,
+				extinct: data.extinct
+			}
+			subscription = this.http.post(`${this.url_base}/species`, dataSend).subscribe({
+				next: (result) => {
+					resolve(result);
+				},
+				error: (error: any) => {
+					reject(error);
+				},
+				complete: () => {
+					if (subscription) {
+						subscription.unsubscribe();
+					}
+				}
+			})
+		});
+	}
+
+	public putSpecies(data: Species): Promise<any> {
+		return new Promise((resolve, reject) => {
+			let subscription: Subscription;
+			let dataSend = {
+				type_id: data.type_id,
+				name: data.name,
+				habitats_id: data.habitats_id,
+				diet_id: data.diet_id,
+				extinct: data.extinct
+			}
+			subscription = this.http.put(`${this.url_base}/species/${data.id}`, dataSend).subscribe({
 				next: (result) => {
 					resolve(result);
 				},

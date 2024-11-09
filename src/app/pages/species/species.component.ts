@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TableComponent } from '../../components/table/table.component';
-import { Column, Diet, Habitat, Species, Type } from '../../interfaces/column';
+import { Action, Column, Diet, Habitat, Species, Type } from '../../interfaces/column';
 import { SpeciesService } from '../../services/species.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -74,17 +74,28 @@ export class SpeciesComponent {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
+      id: [],
       type_id: ['', [Validators.required]],
       name: ['', [Validators.required]],
       habitats_id: ['', [Validators.required]],
       diet_id: ['', [Validators.required]],
-      extinct: ['', [Validators.required]]
+      extinct: ['', [Validators.required]],
+      action: ['N', [Validators.required]]
     })
   }
 
   public async onSave() {
-    await this.servicesSpecies.postSpecies(this.form.value);
+    let value = this.form.value
+    if (value.action == 'N') {
+      await this.servicesSpecies.postSpecies(this.form.value);
+    }
+
+    if (value.action == 'E') {
+      await this.servicesSpecies.putSpecies(this.form.value)
+    }
+
     this.form.reset();
+    this.form.get('action')?.setValue('N');
     await this.consultData();
 
   }
@@ -109,4 +120,18 @@ export class SpeciesComponent {
     this.rowsSpecies = await this.getSpecies();
   }
 
+  public actions(event: Action) {
+
+    if (event.action == 1) {
+      this.form.patchValue({
+        id: event.row.id,
+        type_id: event.row.type_id,
+        name: event.row.name,
+        habitats_id: event.row.habitats_id,
+        diet_id: event.row.diet_id,
+        extinct: event.row.extinct,
+        action: 'E'
+      })
+    }
+  }
 }

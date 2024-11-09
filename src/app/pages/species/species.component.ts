@@ -38,15 +38,15 @@ export class SpeciesComponent {
     },
     {
       label: 'Tipo',
-      value: 'type_id'
+      value: 'type'
     },
     {
       label: 'Hábitat',
-      value: 'habitats_id'
+      value: 'habitats'
     },
     {
       label: 'Dieta',
-      value: 'diet_id'
+      value: 'diet'
     },
     {
       label: 'Extinto',

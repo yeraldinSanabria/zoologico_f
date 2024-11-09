@@ -32,7 +32,7 @@ export class AnimalsComponent {
     },
     {
       label: ' Especie',
-      value: 'species_id'
+      value: 'specie'
     }
   ]
   public rowsAnimal: Animals[] = [];

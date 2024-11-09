@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Column, Habitat } from '../../interfaces/column';
+import { Action, Column, Habitat } from '../../interfaces/column';
 import { TableComponent } from '../../components/table/table.component';
 import { HabitatService } from '../../services/habitat.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -49,14 +49,25 @@ export class HabitatComponent {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
+      id: [],
       name: ['', [Validators.required]],
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required]],
+      action: ['N', [Validators.required]]
     })
   }
 
   public async onSave() {
-    await this.servicesHabitat.postType(this.form.value);
+    let value = this.form.value
+    if (value.action == 'N') {
+      await this.servicesHabitat.postHabitat(this.form.value);
+    }
+
+    if (value.action == 'E') {
+      await this.servicesHabitat.putHabitat(this.form.value)
+    }
+
     this.form.reset();
+    this.form.get('action')?.setValue('N');
     await this.consultData();
   }
 
@@ -64,5 +75,17 @@ export class HabitatComponent {
   private async consultData() {
     this.rowsHabitat = [];
     this.rowsHabitat = await this.getHabitats();
+  }
+
+  public actions(event: Action) {
+
+    if (event.action == 1) {
+      this.form.patchValue({
+        id: event.row.id,
+        name: event.row.name,
+        description: event.row.description,
+        action: 'E'
+      })
+    }
   }
 }

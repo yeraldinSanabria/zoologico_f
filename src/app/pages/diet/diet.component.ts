@@ -78,7 +78,6 @@ export class DietComponent {
   public actions(event: Action) {
 
     if (event.action == 1) {
-      debugger
       this.form.patchValue({
         id: event.row.id,
         type: event.row.type,

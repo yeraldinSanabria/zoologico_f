@@ -45,13 +45,24 @@ export class TypeComponent {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
+      id: [],
       name: ['', [Validators.required]],
+      action: ['N', [Validators.required]],
     })
   }
 
   public async onSave() {
-    await this.servicesType.postType(this.form.value);
+    let value = this.form.value
+    if (value.action == 'N') {
+      await this.servicesType.postType(this.form.value);
+    }
+
+    if (value.action == 'E') {
+      await this.servicesType.putType(this.form.value)
+    }
+
     this.form.reset();
+    this.form.get('action')?.setValue('N');
     await this.consultData();
 
   }
@@ -61,7 +72,14 @@ export class TypeComponent {
     this.rowsType = await this.getTypes();
   }
 
-  public actions(event:Action){
-    console.log(event)
+  public actions(event: Action) {
+
+    if (event.action == 1) {
+      this.form.patchValue({
+        id:event.row.id,
+        name: event.row.name,
+        action: 'E'
+      })
+    }
   }
 }

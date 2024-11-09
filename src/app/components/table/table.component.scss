@@ -10,12 +10,16 @@ table{
                 background: none;
                 border: none;
                 cursor: pointer;
+                padding: 0 20px;
              img{
                 width: 20px;
                 height: auto;
             }   
             }
-            
+            &.actions{
+                text-align: center;
+                width: 200px;
+            }
         }
     }
 }

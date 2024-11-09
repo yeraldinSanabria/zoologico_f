@@ -31,10 +31,14 @@ export class DietService {
 		});
 	}
 
-	public postType(data: Diet): Promise<any> {
+	public postDiet(data: Diet): Promise<any> {
 		return new Promise((resolve, reject) => {
 			let subscription: Subscription;
-			subscription = this.http.post(`${this.url_base}/diet`,data).subscribe({
+			let dataSend = {
+				type: data.type,
+				description: data.description
+			}
+			subscription = this.http.post(`${this.url_base}/diet`, dataSend).subscribe({
 				next: (result) => {
 					resolve(result);
 				},
@@ -50,4 +54,26 @@ export class DietService {
 		});
 	}
 
+	public putDiet(data: Diet): Promise<any> {
+		return new Promise((resolve, reject) => {
+			let subscription: Subscription;
+			let dataSend = {
+				type: data.type,
+				description: data.description
+			}
+			subscription = this.http.put(`${this.url_base}/diet/${data.id}`, dataSend).subscribe({
+				next: (result) => {
+					resolve(result);
+				},
+				error: (error: any) => {
+					reject(error);
+				},
+				complete: () => {
+					if (subscription) {
+						subscription.unsubscribe();
+					}
+				}
+			})
+		});
+	}
 }

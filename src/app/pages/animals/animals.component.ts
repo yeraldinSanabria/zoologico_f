@@ -31,7 +31,7 @@ export class AnimalsComponent {
       value: 'name'
     },
     {
-      label: ' Especie',
+      label: 'Familia',
       value: 'specie'
     }
   ]

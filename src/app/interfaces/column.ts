@@ -28,6 +28,7 @@ export interface Animals {
     id: number;
     state: number;
     species_id: number;
+    specie:string;
 }
 
 export interface Species {

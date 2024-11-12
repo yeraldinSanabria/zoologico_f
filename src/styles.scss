@@ -1,10 +1,19 @@
-* {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
+@import url('../public/css/animate.css');
+@import url('../public/css/icomoon.css');
+@import url('../public/css/bootstrap.css');
+@import url('../public/css/style.css');
 
-/* el container se enfonca en que height ocupe el 100% y se divida en 3 fracciones a lo alto*/
-.max-content {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
+input[type="text"], select{
+  height: 35px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+input[type="radio"]{
+  accent-color: #da1212;
+  width: 25px;
+  height: 25px;
+  
+}
+form{
+  margin-bottom: 10px;
 }

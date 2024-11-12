@@ -1,16 +1,20 @@
-<form [formGroup]="form" (ngSubmit)="onSave()">
-    <div>
+<h2 class="fh5co-heading animate-box">Animales</h2>
+<form [formGroup]="form" (ngSubmit)="onSave()" class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6 col-xxs-12 work-item">
         <label for="name">Nombre</label>
-        <input type="text" name="name" id="name" formControlName="name">
+        <input type="text" name="name" id="name" formControlName="name" autocomplete="off">
     </div>
-    <div>
-        <label for="species_id">Especies</label>
+    <div class="col-md-6 col-sm-6 col-xs-6 col-xxs-12 work-item">
+        <label for="species_id">Familia</label>
         <select name="species_id" id="species_id" formControlName="species_id">
             @for(rowsSpecie of rowsSpecies; track rowsSpecies){
-                <option [ngValue]="rowsSpecie.id">{{rowsSpecie.name}}</option>
+            <option [ngValue]="rowsSpecie.id">{{rowsSpecie.name}}</option>
             }
         </select>
     </div>
-    <button type="submit" [disabled]="!form.valid">Guardar</button>
+    <div class="col-md-6 col-sm-6 col-xs-6 col-xxs-12 work-item">
+        <button type="submit" [disabled]="!form.valid">Guardar</button>
+    </div>
+
 </form>
-<app-table [columns]="tableAnimals"[rows]="rowsAnimal" (dataActions)="actions($event)"/>
+<app-table [columns]="tableAnimals" [rows]="rowsAnimal" (dataActions)="actions($event)" />

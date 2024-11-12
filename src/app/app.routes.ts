@@ -12,7 +12,7 @@ export const routes: Routes = [
     { path: 'habitat', component: HabitatComponent },
     { path: 'dieta', component: DietComponent },
     { path: 'tipo', component: TypeComponent },
-    { path: 'especies', component: SpeciesComponent },
+    { path: 'familia', component: SpeciesComponent },
 
 
 ];

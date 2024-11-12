@@ -1,12 +1,17 @@
-<form [formGroup]="form" (ngSubmit)="onSave()">
-    <div>
+<h2 class="fh5co-heading animate-box">habitads</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSave()" class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6 col-xxs-12 work-item">
         <label for="name">Nombre</label>
-        <input type="text" name="name" id="name" formControlName="name">
+        <input type="text" name="name" id="name" formControlName="name" autocomplete="off">
     </div>
-    <div>
+    <div class="col-md-6 col-sm-6 col-xs-6 col-xxs-12 work-item">
         <label for="description">Descripción</label>
-        <input type="text" name="description" id="description" formControlName="description">
+        <input type="text" name="description" id="description" formControlName="description" autocomplete="off">
     </div>
-    <button type="submit" [disabled]="!form.valid">Guardar</button>
+    <div class="col-md-12 col-sm-6 col-xs-6 col-xxs-12 work-item">
+        <button type="submit" [disabled]="!form.valid">Guardar</button>
+    </div>
+    
 </form>
 <app-table [columns]="tableHabitats" [rows]="rowsHabitat" (dataActions)="actions($event)"/>
